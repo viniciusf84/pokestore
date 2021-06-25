@@ -10,19 +10,33 @@ export const ResultList = styled.section`
   flex-wrap: wrap;
   gap: 3%;
 
-	h4 {
+	.page-title {
+    font-size: ${rem('24px')};
+    font-weight: 700;
 		display: block;
 		width: 100%;
-		margin-bottom: 20px;
+		margin-bottom: 40px;
+    text-transform: uppercase;
+
+    &:after {
+      content: '';
+      background-color: ${colors.primary};
+      width: 100px;
+      height: 10px;
+      display: block;
+    }
 	}
 
 	.item {
+    ${centerContent()};
+    flex-direction: column;
     background-color: ${colors.white};
 		opacity: 1;
 		animation: fadeIn 0.3s;
     width: 100%;
+    min-height: 200px;
     margin-bottom: 14px;
-    box-shadow: ${rgba(colors.black, .2)} 0px 2px 6px;
+    box-shadow: ${rgba(colors.black, 0.2)} 0px 2px 6px;
     border-bottom: 2px solid ${colors.primary};
 
     @media ${devices.tablet} {
@@ -54,7 +68,12 @@ export const ResultList = styled.section`
         max-width: 250px;
 				object-fit: cover;
         animation: fadeIn 0.3s;
-        ${transitions('transform 0.5s ease-out')};
+        opacity: 0;
+        ${transitions(['transform 0.5s ease-out', 'opacity .3s ease-in'])};
+
+        &.show {
+          opacity: 1;
+        }
 
         @media ${devices.tablet} {
           max-width: 60%;
@@ -66,6 +85,7 @@ export const ResultList = styled.section`
 			cursor: pointer;
       display: flex;
       justify-content: space-between;
+      width: 100%;
 
       span {
         display: block;
@@ -77,6 +97,14 @@ export const ResultList = styled.section`
 
         &:hover & {
           color: ${colors.primary}
+        }
+
+        &.title {
+          text-align: left;
+        }
+
+        &.price {
+          text-align: right;
         }
       }
 		}
