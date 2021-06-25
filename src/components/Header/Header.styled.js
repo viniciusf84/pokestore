@@ -1,18 +1,17 @@
 import styled from 'styled-components';
-import { rem } from 'polished';
+import { rem, rgba } from 'polished';
 import { colors } from '../../styles/variables';
 
 export const HeaderStyled = styled.header`
 	padding: 1rem 0rem;
 	background-color: ${colors.primary};
-	margin-bottom: 10px;
 
-  .wrapper {
-    display: flex;
-  }
+	.wrapper {
+		display: flex;
+	}
 
 	a {
-    color: ${colors.yellow};
+		color: ${colors.yellow};
 	}
 
 	.brand {
@@ -23,13 +22,16 @@ export const HeaderStyled = styled.header`
 		width: 33%;
 	}
 
-  .search-wrapper {
-    width: 67%;
-  }
+	.search-wrapper {
+		width: 67%;
+	}
 
 	h1 {
 		font-size: ${rem('22px')};
-    text-shadow: ${colors.blue} 2px 3px 0px;
+		text-shadow: ${colors.blue} 2px 3px 0px;
 	}
+`;
 
+export const SubHeader = styled.div`
+	background-color: ${rgba(colors.primary, 0.4)};
 `;

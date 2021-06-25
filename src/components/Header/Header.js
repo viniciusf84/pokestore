@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // styles
-import { HeaderStyled } from './Header.styled';
+import { HeaderStyled, SubHeader } from './Header.styled';
 
 // components
 import Search from '../Search';
@@ -28,7 +28,9 @@ const Header = ({ pageTitle }) => {
 				</div>
 			</HeaderStyled>
 
-			<ShopList />
+			<SubHeader>
+				<ShopList />
+			</SubHeader>
 		</>
 	);
 };
