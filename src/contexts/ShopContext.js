@@ -1,26 +1,24 @@
 import React, { createContext, useReducer } from 'react';
 
-const SearchContext = createContext();
+const ShopContext = createContext();
 
 const initialState = {
-  isLoading: false,
+	isLoading: false,
 	search: '',
 	data: [],
-	page: null,
-  message: '',
+	message: '',
 };
 
 const types = {
-  SET_LOADING: 'SET_LOADING',
+	SET_LOADING: 'SET_LOADING',
 	SEARCH_STRING: 'SEARCH_STRING',
 	DATA: 'DATA',
-	PAGE: 'PAGE',
-  SET_MESSAGE: 'SET_MESSAGE',
+	SET_MESSAGE: 'SET_MESSAGE',
 };
 
 const reducer = (state, action) => {
 	switch (action.type) {
-    case types.SET_LOADING:
+		case types.SET_LOADING:
 			return {
 				...state,
 				isLoading: action.payload,
@@ -38,17 +36,11 @@ const reducer = (state, action) => {
 				data: action.payload,
 			};
 
-		case types.PAGE:
+		case types.SET_MESSAGE:
 			return {
 				...state,
-				page: action.payload,
+				message: action.payload,
 			};
-
-    case types.SET_MESSAGE:
-      return {
-        ...state,
-        message: action.payload,
-      };
 
 		default:
 			return {
@@ -58,7 +50,7 @@ const reducer = (state, action) => {
 };
 
 const actions = (dispatch) => ({
-  setIsLoading: (item) =>
+	setIsLoading: (item) =>
 		dispatch({
 			type: types.SET_LOADING,
 			payload: item,
@@ -77,29 +69,23 @@ const actions = (dispatch) => ({
 		});
 	},
 
-	setSearchPage: (item) =>
-		dispatch({
-			type: types.PAGE,
-			payload: item,
-		}),
-
-  setMessage: (item) =>
+	setMessage: (item) =>
 		dispatch({
 			type: types.SET_MESSAGE,
 			payload: item,
 		}),
 });
 
-const SearchContextProvider = (props) => {
+const ShopContextProvider = (props) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
-		<SearchContext.Provider
+		<ShopContext.Provider
 			value={{ ...state, dispatch, actions: actions(dispatch) }}
 		>
 			{props.children}
-		</SearchContext.Provider>
+		</ShopContext.Provider>
 	);
 };
 
-export { SearchContext, SearchContextProvider };
+export { ShopContext, ShopContextProvider };
