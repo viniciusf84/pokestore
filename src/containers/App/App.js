@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// Containers
-import Header from '../Header';
-import Footer from '../Footer';
+// components
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
-// Pages
+// pages
 import Home from '../Home';
 import Profile from '../Profile';
 
@@ -23,7 +23,7 @@ const App = () => {
 		<SearchContextProvider>
 			<Router>
 				<ScrollToTop>
-          <GlobalStyle />
+					<GlobalStyle />
 					<Header pageTitle="POKESTORE" />
 					<Route exact path="/" component={Home} />
 					<Route path="/profile/:id" component={Profile} />
