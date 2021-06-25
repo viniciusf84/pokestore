@@ -6,17 +6,23 @@ import { SearchInputStyled } from './SearchInput.styled';
 function SearchInput(props) {
 	const { name, placeholder, onChange } = props;
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onChange(event)
+    }
+  }
+
 	return (
 		<SearchInputStyled>	
 			<input
 				type="text"
 				className="form-control"
 				name={name}
-				placeholder={placeholder}
-				onChange={onChange}
+				placeholder={placeholder}				
 				autoComplete="off"
+        onKeyDown={e => handleKeyDown(e)}
 			/>
-			<span className="icon__wrapper">
+			<span className="icon__wrapper" onClick={e => onChange(e)}>
 				<FontAwesomeIcon className="end-xs" icon={faSearch} size="2x" />
 			</span>
 		</SearchInputStyled>
