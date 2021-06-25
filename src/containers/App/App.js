@@ -13,14 +13,14 @@ import Profile from '../Profile';
 import ScrollToTop from '../../utils/ScrollToTop';
 
 // Store
-import { SearchContextProvider } from '../../contexts/SearchContext';
+import { ShopContextProvider } from '../../contexts/ShopContext';
 
 // style
 import { GlobalStyle } from '../../styles/global.styled';
 
 const App = () => {
 	return (
-		<SearchContextProvider>
+		<ShopContextProvider>
 			<Router>
 				<ScrollToTop>
 					<GlobalStyle />
@@ -32,7 +32,7 @@ const App = () => {
 					/>
 				</ScrollToTop>
 			</Router>
-		</SearchContextProvider>
+		</ShopContextProvider>
 	);
 };
 

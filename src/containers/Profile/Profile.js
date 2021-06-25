@@ -4,43 +4,39 @@ import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 // hooks
-import { SearchContext } from '../../contexts/SearchContext';
+import { ShopContext } from '../../contexts/ShopContext';
 
 // Components
 import LoadingContent from '../../components/LoadingContent';
 
-// styles 
+// styles
 import { Details } from './Profile.styled';
 
 export default function Profile({ match: { params }, history }) {
 	const [isLoading, setIsLoading] = useState(0);
 	const [data, setData] = useState({});
 	const [message, setMessage] = useState(undefined);
-	const searchContext = useContext(SearchContext);
+	const shopContext = useContext(ShopContext);
 	const { Title, Poster, Director, Actors, Genre, Year, Plot, Website } = data;
 
-  useEffect(() => {
-    // back to list and updates search
-    if(Object.keys(data).length > 0 && searchContext.search) {
-      history.push('/');
-      searchContext.actions.setUpdateList(true);
-    }
-  }, [searchContext.search])
+	useEffect(() => {
+		// back to list
+		if (Object.keys(data).length > 0 && shopContext.search) {
+			history.push('/');
+		}
+	}, [shopContext.search]);
 
 	return (
 		<section className="character-profile">
 			<div className="wrapper container-fluid">
 				{message && <h3>{message}</h3>}
 
-				<LoadingContent
-					isLoading={isLoading}
-					loadingText="Loading details"
-				>
+				<LoadingContent isLoading={isLoading} loadingText="Loading details">
 					{Object.keys(data).length > 0 ? (
 						<Details>
-							{searchContext.search && (
+							{shopContext.search && (
 								<span className="small">
-									You've searched for "{searchContext.search}"{' '}
+									You've searched for "{shopContext.search}"{' '}
 								</span>
 							)}
 
