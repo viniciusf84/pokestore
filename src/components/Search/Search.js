@@ -9,14 +9,12 @@ export default function Search() {
 	const searchContext = useContext(SearchContext);
 	const {
 		setSearchString,
-		setUpdateList,
     setMessage,
 	} = searchContext.actions;
 
 	const onHandleChange = useCallback(
 		debounce((value) => {
 			if (value.length > 3) {
-				setUpdateList(true);
 				setSearchString(value);
 				setMessage('');
 			}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyledFooter } from './Footer.styled';
 
-function Footer(props) {
+function Footer({ text }) {
 	return (
 		<StyledFooter id="footer">
-			<p>{props.text}</p>
+			<p>{text}</p>
 		</StyledFooter>
 	);
 }
