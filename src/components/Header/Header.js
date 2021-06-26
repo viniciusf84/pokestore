@@ -14,7 +14,7 @@ import { ShopContext } from '../../contexts/ShopContext';
 
 const Header = ({ pageTitle }) => {
 	const shopContext = useContext(ShopContext);
-	const { cart } = shopContext;
+	const { cart, total } = shopContext;
 
 	return (
 		<>
@@ -30,7 +30,7 @@ const Header = ({ pageTitle }) => {
 						<Search />
 					</div>
 
-					<HeaderCart items={cart} />
+					<HeaderCart items={cart} total={total} />
 				</div>
 			</HeaderStyled>
 
