@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 // pages
+import CheckoutModal from '../CheckoutModal';
 import Home from '../Home';
 import Profile from '../Profile';
 
@@ -27,6 +28,7 @@ const App = () => {
 					<Header pageTitle="POKESTORE" />
 					<Route exact path="/" component={Home} />
 					<Route path="/profile/:id" component={Profile} />
+					<CheckoutModal />
 					<Footer
 						text={`Pokestore ${new Date().getFullYear()} - Todos os direitos reservados`}
 					/>
