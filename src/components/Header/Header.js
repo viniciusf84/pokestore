@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // styles
@@ -9,7 +9,13 @@ import Search from '../Search';
 import HeaderCart from '../HeaderCart';
 import ShopList from '../ShopList';
 
+// hook
+import { ShopContext } from '../../contexts/ShopContext';
+
 const Header = ({ pageTitle }) => {
+	const shopContext = useContext(ShopContext);
+	const { cart } = shopContext;
+
 	return (
 		<>
 			<HeaderStyled id="header">
@@ -24,7 +30,7 @@ const Header = ({ pageTitle }) => {
 						<Search />
 					</div>
 
-					<HeaderCart />
+					<HeaderCart items={cart} />
 				</div>
 			</HeaderStyled>
 
