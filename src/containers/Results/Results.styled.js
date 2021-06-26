@@ -15,7 +15,7 @@ export const ResultList = styled.section`
     font-weight: 700;
 		display: block;
 		width: 100%;
-		margin-bottom: 40px;
+		margin: 2rem 0 2rem;
     text-transform: uppercase;
 
     &:after {
@@ -66,18 +66,12 @@ export const ResultList = styled.section`
 			img {
         width: auto;
         max-width: 250px;
-				object-fit: cover;
+				object-fit: contain;
         animation: fadeIn 0.3s;
-        opacity: 0;
-        ${transitions(['transform 0.5s ease-out', 'opacity .3s ease-in'])};
-
-        &.show {
-          opacity: 1;
-        }
-
-        @media ${devices.tablet} {
-          max-width: 60%;
-        }
+        ${transitions([
+					'transform 0.5s ease-out',
+					'opacity .3s ease-in',
+				])};      
 			}
 		}
 
@@ -126,24 +120,4 @@ export const ResultList = styled.section`
 		}
 	}
 }
-
-.load-more {
-	font-size: ${rem('18px')};
-	width: 30%;
-	display: block;
-	margin: 30px auto 100px;
-	border: none;
-	color: ${colors.text_2};
-	background-color: ${colors.white};
-	line-height: 3rem;
-	cursor: pointer;
-	font-weight: bold;
-
-	&:hover {
-		background-color: ${colors.yellow};
-	}
-
-	@media ${devices.tablet} {
-		width: 100%;
-	}
 `;
