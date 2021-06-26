@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useContext } from 'react';
+import React, { useEffect, useMemo, useCallback, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faFireAlt,
@@ -16,37 +16,44 @@ import { ShopContext } from '../../contexts/ShopContext';
 
 export default function ShopList() {
 	const shopContext = useContext(ShopContext);
-	const { search } = shopContext;
-	const { setSearchString } = shopContext.actions;
+	const { shop, selected } = shopContext;
+	const { setShop, setSelectedPokemon } = shopContext.actions;
 
 	let history = useHistory();
 
 	const list = useMemo(
 		() => [
+			{ type: 'electric', icon: faPlug },
 			{ type: 'ice', icon: faCube },
 			{ type: 'water', icon: faWater },
 			{ type: 'fire', icon: faFireAlt },
-			{ type: 'electric', icon: faPlug },
 		],
 		[],
 	);
 
+	const selectShop = useCallback((chosen) => {
+		setShop(chosen);
+		setSelectedPokemon(null);
+	}, []);
+
 	useEffect(() => {
-		history.push('/');
-	}, [search]);
+		if (!selected) {
+			history.push('/');
+		}
+	}, [selected]);
 
 	return (
 		<ShopListStyled>
 			<div className="wrapper">
 				<ul className="flex">
-					{list.map((shop) => (
-						<li className="shop-item" key={shop.type}>
+					{list.map((shopItem) => (
+						<li className="shop-item" key={shopItem.type}>
 							<button
-								onClick={() => setSearchString(shop.type)}
-								className={search === shop.type ? 'active' : ''}
+								onClick={() => selectShop(shopItem.type)}
+								className={shop === shopItem.type ? 'active' : ''}
 							>
-								<FontAwesomeIcon icon={shop.icon} />
-								{shop.type}
+								<FontAwesomeIcon icon={shopItem.icon} />
+								{shopItem.type}
 							</button>
 						</li>
 					))}

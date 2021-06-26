@@ -1,35 +1,41 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useEffect, useCallback } from 'react';
+import useLocalState from '../utils/UseLocalState';
 
 // service
 import { getPokemonByType } from '../services';
 
-// hook
 const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [search, setSearchString] = useState('');
-	const [data, setSearchData] = useState([]);
-	const [selected, setSelectedPokemon] = useState(null);
-	const [message, setMessage] = useState('');
-	const [cart, setAddToCart] = useState([]);
+	const [isLoading, setIsLoading] = useLocalState('isLoading', false);
+	const [shop, setShop] = useLocalState('shop', '');
+	const [data, setSearchData] = useLocalState('data', []);
+	const [selected, setSelectedPokemon] = useLocalState('selected', null);
+	const [message, setMessage] = useLocalState('message', '');
+	const [cart, setAddToCart] = useLocalState('cart', []);
+	const [total, setTotal] = useLocalState('total', 0);
+	const [resetCart, setResetCart] = useLocalState('resetCart', false);
 
 	const state = {
 		isLoading,
-		search,
+		shop,
 		data,
 		selected,
 		message,
 		cart,
+		total,
+		resetCart,
 	};
 
 	const actions = {
 		setIsLoading,
-		setSearchString,
+		setShop,
 		setSearchData,
 		setSelectedPokemon,
 		setMessage,
 		setAddToCart,
+		setTotal,
+		setResetCart,
 	};
 
 	const getResults = useCallback(async (searchStr) => {
@@ -42,24 +48,47 @@ const ShopContextProvider = (props) => {
 			setMessage(`${searchStr} Pokemón shop`);
 		} catch (error) {
 			setMessage(error);
+			console.error(error);
 		}
 
 		setIsLoading(false);
 	}, []);
 
+	const getTotal = useCallback(() => {
+		const cartTotal = cart.reduce(function (total, current) {
+			return total + current.base_experience;
+		}, 0);
+
+		return cartTotal;
+	}, [cart]);
+
 	useEffect(() => {
 		if (data && data.length > 0) {
 			// brings data from context
 
-			setMessage(`${search} Pokemón shop`);
+			setMessage(`${shop} Pokemón shop`);
 		}
-	}, [data, search]);
+	}, [data, shop]);
 
 	useEffect(() => {
-		if (search) {
-			getResults(search);
+		if (shop) {
+			getResults(shop);
 		}
-	}, [search]);
+	}, [shop]);
+
+	useEffect(() => {
+		const total = getTotal();
+
+		setTotal(total);
+	}, [cart]);
+
+	useEffect(() => {
+		if (resetCart) {
+			setAddToCart([]);
+			setTotal(0);
+			setResetCart(false);
+		}
+	}, [resetCart]);
 
 	return (
 		<ShopContext.Provider value={{ ...state, actions: actions }}>
