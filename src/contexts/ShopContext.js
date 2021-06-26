@@ -1,88 +1,68 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 
+// service
+import { getPokemonByType } from '../services';
+
+// hook
 const ShopContext = createContext();
 
-const initialState = {
-	isLoading: false,
-	search: '',
-	data: [],
-	message: '',
-};
-
-const types = {
-	SET_LOADING: 'SET_LOADING',
-	SEARCH_STRING: 'SEARCH_STRING',
-	DATA: 'DATA',
-	SET_MESSAGE: 'SET_MESSAGE',
-};
-
-const reducer = (state, action) => {
-	switch (action.type) {
-		case types.SET_LOADING:
-			return {
-				...state,
-				isLoading: action.payload,
-			};
-
-		case types.SEARCH_STRING:
-			return {
-				...state,
-				search: action.payload.trim(),
-			};
-
-		case types.DATA:
-			return {
-				...state,
-				data: action.payload,
-			};
-
-		case types.SET_MESSAGE:
-			return {
-				...state,
-				message: action.payload,
-			};
-
-		default:
-			return {
-				...state,
-			};
-	}
-};
-
-const actions = (dispatch) => ({
-	setIsLoading: (item) =>
-		dispatch({
-			type: types.SET_LOADING,
-			payload: item,
-		}),
-
-	setSearchString: (item) =>
-		dispatch({
-			type: types.SEARCH_STRING,
-			payload: item,
-		}),
-
-	setSearchData: (item) => {
-		dispatch({
-			type: types.DATA,
-			payload: item,
-		});
-	},
-
-	setMessage: (item) =>
-		dispatch({
-			type: types.SET_MESSAGE,
-			payload: item,
-		}),
-});
-
 const ShopContextProvider = (props) => {
-	const [state, dispatch] = useReducer(reducer, initialState);
+	const [isLoading, setIsLoading] = useState(false);
+	const [search, setSearchString] = useState('');
+	const [data, setSearchData] = useState([]);
+	const [selected, setSelectedPokemon] = useState(null);
+	const [message, setMessage] = useState('');
+	const [cart, setAddToCart] = useState([]);
+
+	const state = {
+		isLoading,
+		search,
+		data,
+		selected,
+		message,
+		cart,
+	};
+
+	const actions = {
+		setIsLoading,
+		setSearchString,
+		setSearchData,
+		setSelectedPokemon,
+		setMessage,
+		setAddToCart,
+	};
+
+	const getResults = useCallback(async (searchStr) => {
+		setIsLoading(true);
+
+		try {
+			const response = await getPokemonByType(searchStr);
+
+			setSearchData(response.data.pokemon);
+			setMessage(`${searchStr} Pokemón shop`);
+		} catch (error) {
+			setMessage(error);
+		}
+
+		setIsLoading(false);
+	}, []);
+
+	useEffect(() => {
+		if (data && data.length > 0) {
+			// brings data from context
+
+			setMessage(`${search} Pokemón shop`);
+		}
+	}, [data, search]);
+
+	useEffect(() => {
+		if (search) {
+			getResults(search);
+		}
+	}, [search]);
 
 	return (
-		<ShopContext.Provider
-			value={{ ...state, dispatch, actions: actions(dispatch) }}
-		>
+		<ShopContext.Provider value={{ ...state, actions: actions }}>
 			{props.children}
 		</ShopContext.Provider>
 	);
