@@ -1,111 +1,101 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 // hooks
 import { ShopContext } from '../../contexts/ShopContext';
 
 // Components
-import LoadingContent from '../../components/LoadingContent';
+import Image from '../../components/Image';
 
 // styles
-import { Details } from './Profile.styled';
+import { Details, AddToCartButton } from './Profile.styled';
 
 export default function Profile({ match: { params }, history }) {
-	const [isLoading, setIsLoading] = useState(0);
-	const [data, setData] = useState({});
-	const [message, setMessage] = useState(undefined);
 	const shopContext = useContext(ShopContext);
-	const { Title, Poster, Director, Actors, Genre, Year, Plot, Website } = data;
-
-	useEffect(() => {
-		// back to list
-		if (Object.keys(data).length > 0 && shopContext.search) {
-			history.push('/');
-		}
-	}, [shopContext.search]);
+	const selectedProfile = shopContext.selected;
+	const { setAddToCart } = shopContext.actions;
+	const { cart, search } = shopContext;
+	const { name, image, moves, types, abilities, base_experience } =
+		selectedProfile;
 
 	return (
 		<section className="character-profile">
 			<div className="wrapper container-fluid">
-				{message && <h3>{message}</h3>}
-
-				<LoadingContent isLoading={isLoading} loadingText="Loading details">
-					{Object.keys(data).length > 0 ? (
-						<Details>
-							{shopContext.search && (
-								<span className="small">
-									You've searched for "{shopContext.search}"{' '}
-								</span>
-							)}
-
-							<h1>{Title}</h1>
-
-							<div className="row">
-								<div className="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-									<figure className="poster">
-										{Poster === 'N/A' ? (
-											<FontAwesomeIcon icon={faFilm} size="10x" />
-										) : (
-											<img src={Poster} alt={Title} />
-										)}
-									</figure>
-
-									<Link className="back" to="/">
-										Back to search
-									</Link>
+				{Object.keys(selectedProfile).length > 0 ? (
+					<Details>
+						<div className="row">
+							<div className="col col__info">
+								<div className="image-wrapper">
+									<Image src={image} alt={name} />
 								</div>
 
-								<div className="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-									<div className="text">
-										<p>
-											Title: <strong>{Title}</strong>
-										</p>
-										<p>
-											Director: <strong>{Director}</strong>
-										</p>
-										<p>
-											Actors: <strong>{Actors}</strong>
-										</p>
-										<p>
-											Genre: <strong>{Genre}</strong>
-										</p>
-										<p>
-											Year: <strong>{Year}</strong>
-										</p>
-										{Website !== 'N/A' && (
-											<p>
-												Website:{' '}
-												<strong>
-													<a
-														href={Website}
-														target="_blank"
-														rel="noopener noreferrer"
-													>
-														{Website}
-													</a>
-												</strong>
-											</p>
-										)}
-										{Plot !== 'N/A' && (
-											<p className="plot">
-												Description: <br />
-												{Plot}
-											</p>
-										)}
-									</div>
+								<div className="text">
+									<span>Types: </span>
+									<ul className="list">
+										{types.map((type, index) => {
+											return <li key={type.type.name}>{type.type.name}</li>;
+										})}
+									</ul>
+								</div>
+
+								<div className="text">
+									<span>Abilities: </span>
+									<ul className="list">
+										{abilities.map((ability) => (
+											<li key={ability.ability.name}>{ability.ability.name}</li>
+										))}
+									</ul>
+								</div>
+
+								<div className="text">
+									<span>Moves: </span>
+									<ul className="list">
+										{moves.map((move) => (
+											<li key={move.move.name}>{move.move.name}</li>
+										))}
+									</ul>
 								</div>
 							</div>
-						</Details>
-					) : (
-						<Details>
-							<Link className="back" to="/">
-								Back
-							</Link>
-						</Details>
-					)}
-				</LoadingContent>
+
+							<div className="col col__add">
+								<h1>{name.toUpperCase()}</h1>
+
+								<br />
+
+								<div className="text">
+									{/* Base experience replaces price   */}
+									<p className="price">${base_experience}</p>
+									<span>Em até 10x no cartão</span>
+								</div>
+
+								<br />
+
+								<hr />
+
+								<AddToCartButton
+									onClick={() => setAddToCart([...cart, selectedProfile])}
+								>
+									<FontAwesomeIcon icon={faShoppingCart} />
+									Comprar
+								</AddToCartButton>
+							</div>
+						</div>
+
+						<Link className="back" to="/">
+							<FontAwesomeIcon icon={faArrowLeft} />
+							Back to shop
+						</Link>
+					</Details>
+				) : (
+					<Details>
+						<p>No results.</p>
+						<Link className="back" to="/">
+							<FontAwesomeIcon icon={faArrowLeft} /> Back
+						</Link>
+					</Details>
+				)}
 			</div>
 		</section>
 	);
