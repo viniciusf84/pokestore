@@ -8,7 +8,7 @@ function Home() {
 	return (
 		<HomeStyled id="home">
 			<main className="main-content">
-        <Results />
+				<Results />
 			</main>
 		</HomeStyled>
 	);
