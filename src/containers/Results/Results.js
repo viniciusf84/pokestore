@@ -24,7 +24,7 @@ function Results() {
 			data &&
 			data.length > 0 && (
 				<>
-					<h4 className="page-title">{message}</h4>
+					<h1 className="page-title">{message}</h1>
 
 					{data.map((character) => (
 						<Item
