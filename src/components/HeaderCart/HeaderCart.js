@@ -1,13 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
+// components
+import Cart from '../Cart';
+
+// styles
 import {
 	HeaderCartStyled,
 	HeaderCartButton,
 	CartModal,
 } from './HeaderCart.styled';
 
-export default function HeaderCart({ items, link }) {
+export default function HeaderCart({ items, total }) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const emptyCart = useMemo(() => {
@@ -31,6 +36,16 @@ export default function HeaderCart({ items, link }) {
 			{isOpen && (
 				<CartModal className={emptyCart && 'empty'}>
 					{emptyCart && <p>Seu carrinho está vazio.</p>}
+
+					{!emptyCart && (
+						<Cart
+							list={items}
+							title="name"
+							price="base_experience"
+							image="image"
+							total={total}
+						/>
+					)}
 				</CartModal>
 			)}
 		</HeaderCartStyled>
