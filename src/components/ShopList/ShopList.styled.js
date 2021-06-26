@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors, centerContent } from '../../styles/variables';
-import { rem, darken, transitions } from 'polished';
+import { rem, rgba, transitions } from 'polished';
 
 export const ShopListStyled = styled.section`
 	.flex {
@@ -21,12 +21,12 @@ export const ShopListStyled = styled.section`
 
 		color: ${colors.primary};
 		border: 1px solid ${colors.primary};
-		background-color: none;
+		background-color: ${colors.white};
 		width: 100%;
 		padding: 1rem;
 		font-size: ${rem('16px')};
 		cursor: pointer;
-		${transitions('color 0.3s ease-in')};
+		${transitions('background-color 0.3s ease-in')};
 
 		svg {
 			font-size: ${rem('20px')};
@@ -34,7 +34,13 @@ export const ShopListStyled = styled.section`
 		}
 
 		&:hover {
-			color: ${darken(0.4, colors.primary)};
+			background-color: ${rgba(colors.primary, 0.1)};
+			color: ${colors.white};
+		}
+
+		&.active {
+			color: ${colors.white};
+			background-color: ${colors.primary};
 		}
 	}
 `;
