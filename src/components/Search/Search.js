@@ -1,5 +1,4 @@
 import React, { useContext, useCallback } from 'react';
-import { debounce } from 'lodash';
 import { ShopContext } from '../../contexts/ShopContext';
 
 // components
@@ -7,15 +6,12 @@ import SearchInput from '../../components/SearchInput';
 
 export default function Search() {
 	const shopContext = useContext(ShopContext);
-	const { setSearchString, setMessage } = shopContext.actions;
+	const { setShop, setMessage } = shopContext.actions;
 
-	const onHandleChange = useCallback(
-		debounce((value) => {
-			setSearchString(value);
-			setMessage('');
-		}, 600),
-		[],
-	);
+	const onHandleChange = useCallback((value) => {
+		setShop(value);
+		setMessage('');
+	}, []);
 
 	return (
 		<SearchInput
