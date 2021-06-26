@@ -13,6 +13,10 @@ export const CartItem = styled.div`
 	padding: 0 0 8px;
 	border-bottom: 1px solid ${rgba(colors.text_3, 0.3)};
 
+	&:last-of-type {
+		border: none;
+	}
+
 	figure {
 		margin: 0;
 		max-width: 70px;
