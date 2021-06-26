@@ -6,7 +6,7 @@ export const HeaderCartStyled = styled.section`
 	position: relative;
 `;
 
-export const HeaderCartButton = styled.a`
+export const HeaderCartButton = styled.button`
 	display: inline-flex;
 	justify-content: space-around;
 	align-items: center;
@@ -28,7 +28,7 @@ export const HeaderCartButton = styled.a`
 	}
 
 	span {
-		font-size: ${rem('16px')};
+		font-size: ${rem('14px')};
 		color: ${colors.white};
 		${transitions('transform 0.2s ease-out')};
 	}
@@ -41,9 +41,10 @@ export const HeaderCartButton = styled.a`
 
 export const CartModal = styled.div`
 	${fadeIn()}
+
 	position: absolute;
 	right: 0;
-	top: 49px;
+	top: 36px;
 	height: 300px;
 	width: 400px;
 	background-color: ${colors.white};
