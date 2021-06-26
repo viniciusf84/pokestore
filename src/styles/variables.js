@@ -9,6 +9,7 @@ export const colors = {
 	black: '#000',
 	yellow: '#feca1b',
 	blue: '#3761a8',
+	green: '#40cd28',
 	background_clear: '#f2f6f8',
 	background_dark: '#222222',
 	background_gray: '#5d5e5f',
@@ -43,6 +44,21 @@ export const fadeIn = () => `
 			opacity: 1;
 		}
 	}
+`;
+
+/**
+ * Loading image placeholder
+ */
+
+export const placeHolderShimmer = () => `
+  @keyframes placeHolderShimmer{
+    0%{
+      background-position: -468px 0
+    }
+    100%{
+      background-position: 468px 0
+    }
+  }
 `;
 
 /**
