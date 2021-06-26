@@ -3,23 +3,14 @@ import { rem, transitions, darken } from 'polished';
 import { colors, fadeIn, devices } from '../../styles/variables';
 
 export const Details = styled.article`
+	${fadeIn()};
+
 	opacity: 1;
-	animation: ${fadeIn()} 1s;
 	margin-bottom: 60px;
 
 	h1 {
 		font-size: ${rem('40px')};
 		margin: 0 0 2rem;
-	}
-
-	figure.poster {
-		margin: 0;
-		min-height: 300px;
-		background-color: ${colors.background_gray};
-
-		img {
-			width: 100%;
-		}
 	}
 
 	a.back {
@@ -65,6 +56,7 @@ export const Details = styled.article`
 			}
 
 			.image-wrapper {
+				animation: fadeIn 1s;
 				background-color: ${colors.white};
 
 				figure {
@@ -133,25 +125,5 @@ export const Details = styled.article`
 
 	a {
 		color: ${colors.yellow};
-	}
-`;
-
-export const AddToCartButton = styled.button`
-	border: none;
-	background-color: ${colors.green};
-	color: ${colors.white};
-	padding: 1.125rem 0;
-	width: 100%;
-	font-size: ${rem('20px')};
-	margin-top: 16px;
-	cursor: pointer;
-	${transitions('background-color 0.2s ease-out')};
-
-	svg {
-		margin-right: 8px;
-	}
-
-	&:hover {
-		background-color: ${darken(0.2, colors.green)};
 	}
 `;

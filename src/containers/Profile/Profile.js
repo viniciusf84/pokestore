@@ -8,33 +8,31 @@ import { ShopContext } from '../../contexts/ShopContext';
 
 // Components
 import Image from '../../components/Image';
+import CartButton from '../../components/CartButton';
 
 // styles
-import { Details, AddToCartButton } from './Profile.styled';
+import { Details } from './Profile.styled';
 
 export default function Profile({ match: { params }, history }) {
 	const shopContext = useContext(ShopContext);
-	const selectedProfile = shopContext.selected;
 	const { setAddToCart } = shopContext.actions;
-	const { cart, search } = shopContext;
-	const { name, image, moves, types, abilities, base_experience } =
-		selectedProfile;
+	const { cart, selected } = shopContext;
 
 	return (
 		<section className="character-profile">
 			<div className="wrapper container-fluid">
-				{Object.keys(selectedProfile).length > 0 ? (
+				{selected ? (
 					<Details>
 						<div className="row">
 							<div className="col col__info">
 								<div className="image-wrapper">
-									<Image src={image} alt={name} />
+									<Image src={selected.image} alt={selected.name} />
 								</div>
 
 								<div className="text">
 									<span>Types: </span>
 									<ul className="list">
-										{types.map((type, index) => {
+										{selected.types.map((type, index) => {
 											return <li key={type.type.name}>{type.type.name}</li>;
 										})}
 									</ul>
@@ -43,7 +41,7 @@ export default function Profile({ match: { params }, history }) {
 								<div className="text">
 									<span>Abilities: </span>
 									<ul className="list">
-										{abilities.map((ability) => (
+										{selected.abilities.map((ability) => (
 											<li key={ability.ability.name}>{ability.ability.name}</li>
 										))}
 									</ul>
@@ -52,7 +50,7 @@ export default function Profile({ match: { params }, history }) {
 								<div className="text">
 									<span>Moves: </span>
 									<ul className="list">
-										{moves.map((move) => (
+										{selected.moves.map((move) => (
 											<li key={move.move.name}>{move.move.name}</li>
 										))}
 									</ul>
@@ -60,13 +58,13 @@ export default function Profile({ match: { params }, history }) {
 							</div>
 
 							<div className="col col__add">
-								<h1>{name.toUpperCase()}</h1>
+								<h1>{selected.name.toUpperCase()}</h1>
 
 								<br />
 
 								<div className="text">
 									{/* Base experience replaces price   */}
-									<p className="price">${base_experience}</p>
+									<p className="price">${selected.base_experience}</p>
 									<span>Em até 10x no cartão</span>
 								</div>
 
@@ -74,12 +72,11 @@ export default function Profile({ match: { params }, history }) {
 
 								<hr />
 
-								<AddToCartButton
-									onClick={() => setAddToCart([...cart, selectedProfile])}
-								>
-									<FontAwesomeIcon icon={faShoppingCart} />
-									Comprar
-								</AddToCartButton>
+								<CartButton
+									text="Buy"
+									icon={faShoppingCart}
+									action={() => setAddToCart([...cart, selected])}
+								/>
 							</div>
 						</div>
 
