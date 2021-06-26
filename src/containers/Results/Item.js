@@ -19,7 +19,6 @@ import { getPokemonByUrl } from '../../services';
 
 function Item({ name, pokemonUrl }) {
 	const [isLoadingContent, setIsLoadingContent] = useState(true);
-	const [displayImage, setDisplayImage] = useState(false);
 	const [pokemonData, setPokemonData] = useState({});
 
 	let history = useHistory();
@@ -38,6 +37,7 @@ function Item({ name, pokemonUrl }) {
 				setPokemonData(response.data);
 			} catch (error) {
 				setMessage(error);
+				console.error(error);
 			}
 
 			setIsLoadingContent(false);
@@ -71,12 +71,7 @@ function Item({ name, pokemonUrl }) {
 				loadingText={`Loading ${name.toUpperCase()}`}
 			>
 				<div className="wrap  img__wrapper">
-					<Image
-						src={getImage}
-						alt={name}
-						onLoad={() => setDisplayImage(true)}
-						className={displayImage ? 'show' : 'hide'}
-					/>
+					<Image src={getImage} alt={name} />
 				</div>
 
 				<div className="text">
