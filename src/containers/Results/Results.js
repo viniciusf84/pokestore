@@ -1,10 +1,7 @@
-import React, { useEffect, useMemo, useCallback, useContext } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 
 // hooks
 import { ShopContext } from '../../contexts/ShopContext';
-
-// service
-import { getPokemonByType } from '../../services';
 
 // components
 import LoadingContent from '../../components/LoadingContent';
@@ -15,41 +12,12 @@ import { ResultList } from './Results.styled';
 
 function Results() {
 	const shopContext = useContext(ShopContext);
-	const { isLoading, data, search, message } = shopContext;
-	const { setIsLoading, setSearchData, setMessage } = shopContext.actions;
+	const { isLoading, data, message } = shopContext;
+	const { setSelectedPokemon } = shopContext.actions;
 
-	const getResults = useCallback(async (searchStr) => {
-		setIsLoading(true);
-
-		try {
-			const response = await getPokemonByType(searchStr);
-
-			setSearchData(response.data.pokemon);
-			setMessage(`${searchStr} Pokemón shop`);
-		} catch (error) {
-			setMessage(error);
-		}
-
-		setIsLoading(false);
+	useEffect(() => {
+		setSelectedPokemon('null');
 	}, []);
-
-	useEffect(() => {
-		if (data && data.length > 0) {
-			// brings data from context
-
-			setMessage(`${search} Pokemón shop`);
-		}
-	}, [data, search]);
-
-	useEffect(() => {
-		if (search === '') {
-			setMessage('');
-		}
-
-		if (search.length > 0) {
-			getResults(search);
-		}
-	}, [search]);
 
 	const displayPokemonList = useMemo(() => {
 		return (
@@ -60,6 +28,7 @@ function Results() {
 
 					{data.map((character) => (
 						<Item
+							key={character.pokemon.name}
 							name={character.pokemon.name}
 							pokemonUrl={character.pokemon.url}
 						/>
