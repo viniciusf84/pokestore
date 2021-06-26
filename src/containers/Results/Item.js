@@ -1,19 +1,32 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useMemo,
+	useContext,
+	useCallback,
+} from 'react';
+import { useHistory } from 'react-router';
+
+// hook
+import { ShopContext } from '../../contexts/ShopContext';
 
 // components
-import { ShopContext } from '../../contexts/ShopContext';
 import LoadingContent from '../../components/LoadingContent';
+import Image from '../../components/Image';
 
 // service
 import { getPokemonByUrl } from '../../services';
 
 function Item({ name, pokemonUrl }) {
-	const [isLoadingContent, setIsLoadingContent] = useState(0);
+	const [isLoadingContent, setIsLoadingContent] = useState(true);
 	const [displayImage, setDisplayImage] = useState(false);
 	const [pokemonData, setPokemonData] = useState({});
-	const [message, setMessage] = useState(undefined);
+
+	let history = useHistory();
 
 	const shopContext = useContext(ShopContext);
+	const { selected } = shopContext;
+	const { setSelectedPokemon, setMessage } = shopContext.actions;
 
 	useEffect(() => {
 		async function getPokemonDataByUrl(url) {
@@ -23,7 +36,6 @@ function Item({ name, pokemonUrl }) {
 				const response = await getPokemonByUrl(url);
 
 				setPokemonData(response.data);
-				setMessage(undefined);
 			} catch (error) {
 				setMessage(error);
 			}
@@ -34,7 +46,7 @@ function Item({ name, pokemonUrl }) {
 		getPokemonDataByUrl(pokemonUrl);
 	}, [pokemonUrl]);
 
-	const image = useMemo(() => {
+	const getImage = useMemo(() => {
 		const imageUrl =
 			pokemonData &&
 			pokemonData.sprites &&
@@ -44,15 +56,23 @@ function Item({ name, pokemonUrl }) {
 		return imageUrl;
 	}, [pokemonData]);
 
+	const selectItem = useCallback((data) => {
+		setSelectedPokemon(data);
+		history.push(`/profile/${data.name}`);
+	}, []);
+
 	return (
-		<div className="item" onClick={() => {}}>
+		<div
+			className="item"
+			onClick={() => selectItem({ ...pokemonData, image: getImage })}
+		>
 			<LoadingContent
 				isLoading={isLoadingContent}
 				loadingText={`Loading ${name.toUpperCase()}`}
 			>
 				<div className="wrap  img__wrapper">
-					<img
-						src={image}
+					<Image
+						src={getImage}
 						alt={name}
 						onLoad={() => setDisplayImage(true)}
 						className={displayImage ? 'show' : 'hide'}
