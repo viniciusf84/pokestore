@@ -15,7 +15,7 @@ export const colors = {
 	background_gray: '#5d5e5f',
 	text_1: '#000000',
 	text_2: '#ffffff',
-	text_3: '#aab2b8',
+	text_3: '#999999',
 	btn_bg: '#32cccc',
 };
 
