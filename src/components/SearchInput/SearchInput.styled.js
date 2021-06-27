@@ -12,12 +12,12 @@ export const SearchInputStyled = styled.div`
 		padding: 0.6rem;
 		width: 100%;
 		font-size: ${rem('14px')};
-    font-weight: normal;
-    border-radius: 8px;
+		font-weight: normal;
+		border-radius: 8px;
 
 		&:focus,
 		&:active {
-			border-color:  ${colors.white};
+			border-color: ${colors.white};
 		}
 	}
 
@@ -27,11 +27,11 @@ export const SearchInputStyled = styled.div`
 		float: right;
 		margin: -30px 16px 0 0;
 		pointer-events: none;
-    color: ${colors.blue};
+		color: ${colors.text_3};
 
 		svg {
 			width: 0.9rem;
-      cursor: pointer;
+			cursor: pointer;
 		}
 	}
 `;
