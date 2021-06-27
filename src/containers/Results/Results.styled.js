@@ -20,7 +20,7 @@ export const ResultList = styled.section`
 
     &:after {
       content: '';
-      background-color: ${colors.primary};
+      background-color: ${(props) => props.theme.colors.primary};
       width: 100px;
       height: 10px;
       display: block;
@@ -37,7 +37,7 @@ export const ResultList = styled.section`
     min-height: 200px;
     margin-bottom: 14px;
     box-shadow: ${rgba(colors.black, 0.2)} 0px 2px 6px;
-    border-bottom: 2px solid ${colors.primary};
+    border-bottom: 2px solid ${(props) => props.theme.colors.primary};
 
     @media ${devices.tablet} {
       width: 48%;
@@ -90,7 +90,7 @@ export const ResultList = styled.section`
         font-weight: bold;
 
         &:hover & {
-          color: ${colors.primary}
+          color: ${(props) => props.theme.colors.primary}
         }
 
         &.title {
@@ -109,7 +109,7 @@ export const ResultList = styled.section`
 			}
 
       .title {
-        color: ${colors.primary};        
+        color: ${(props) => props.theme.colors.primary};        
       }
 
       .img__wrapper {

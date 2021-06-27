@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { rem, transitions, darken } from 'polished';
+import { rem, transitions } from 'polished';
 import { colors, fadeIn, devices } from '../../styles/variables';
 
 export const Details = styled.article`
@@ -16,7 +16,7 @@ export const Details = styled.article`
 	a.back {
 		display: inline-block;
 		background-color: none;
-		color: ${colors.primary};
+		color: ${(props) => props.theme.colors.primary};
 		font-weight: bold;
 		padding: 10px 0;
 		margin: 30px 0 40px;
@@ -58,6 +58,7 @@ export const Details = styled.article`
 			.image-wrapper {
 				animation: fadeIn 1s;
 				background-color: ${colors.white};
+				margin-bottom: 32px;
 
 				figure {
 					margin: 0 0 16px;
