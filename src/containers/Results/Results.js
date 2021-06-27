@@ -12,7 +12,7 @@ import { ResultList } from './Results.styled';
 
 function Results() {
 	const shopContext = useContext(ShopContext);
-	const { isLoading, data, message } = shopContext;
+	const { isLoading, shopData, message } = shopContext;
 	const { setSelectedPokemon } = shopContext.actions;
 
 	useEffect(() => {
@@ -21,12 +21,12 @@ function Results() {
 
 	const displayPokemonList = useMemo(() => {
 		return (
-			data &&
-			data.length > 0 && (
+			shopData &&
+			shopData.length > 0 && (
 				<>
 					<h1 className="page-title">{message}</h1>
 
-					{data.map((character) => (
+					{shopData.map((character) => (
 						<Item
 							key={character.pokemon.name}
 							name={character.pokemon.name}
@@ -36,7 +36,7 @@ function Results() {
 				</>
 			)
 		);
-	}, [data, message]);
+	}, [shopData, message]);
 
 	return (
 		<div className="wrapper container-fluid">
