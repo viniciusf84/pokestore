@@ -19,8 +19,8 @@ export const ShopListStyled = styled.section`
 	button {
 		${centerContent()};
 
-		color: ${colors.primary};
-		border: 1px solid ${colors.primary};
+		color: ${(props) => props.theme.colors.primary};
+		border: 1px solid ${(props) => props.theme.colors.primary};
 		background-color: ${colors.white};
 		width: 100%;
 		padding: 1rem;
@@ -34,13 +34,13 @@ export const ShopListStyled = styled.section`
 		}
 
 		&:hover {
-			background-color: ${rgba(colors.primary, 0.1)};
+			background-color: ${(props) => rgba(props.theme.colors.primary, 0.1)};
 			color: ${colors.white};
 		}
 
 		&.active {
 			color: ${colors.white};
-			background-color: ${colors.primary};
+			background-color: ${(props) => props.theme.colors.primary};
 		}
 	}
 `;
