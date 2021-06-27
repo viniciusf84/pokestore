@@ -3,7 +3,11 @@ import { ModalStyled } from './Modal.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
-const Modal = ({ displayModal = true, setDisplayModal, children }) => {
+export default function Modal({
+	displayModal = true,
+	setDisplayModal,
+	children,
+}) {
 	return (
 		displayModal && (
 			<ModalStyled>
@@ -19,6 +23,4 @@ const Modal = ({ displayModal = true, setDisplayModal, children }) => {
 			</ModalStyled>
 		)
 	);
-};
-
-export default Modal;
+}
