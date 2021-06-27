@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 // components
 import Header from '../../components/Header';
@@ -12,29 +13,37 @@ import Profile from '../Profile';
 
 // utils
 import ScrollToTop from '../../utils/ScrollToTop';
+import useLocalState from '../../utils/UseLocalState';
 
-// Store
+// context
 import { ShopContextProvider } from '../../contexts/ShopContext';
+
+// themes
+import { electric } from '../../themes';
 
 // style
 import { GlobalStyle } from '../../styles/global.styled';
 
 const App = () => {
+	const [theme, setTheme] = useLocalState('theme', electric);
+
 	return (
-		<ShopContextProvider>
-			<Router>
-				<ScrollToTop>
-					<GlobalStyle />
-					<Header pageTitle="POKESTORE" />
-					<Route exact path="/" component={Home} />
-					<Route path="/profile/:id" component={Profile} />
-					<CheckoutModal />
-					<Footer
-						text={`Pokestore ${new Date().getFullYear()} - Todos os direitos reservados`}
-					/>
-				</ScrollToTop>
-			</Router>
-		</ShopContextProvider>
+		<ThemeProvider theme={theme}>
+			<ShopContextProvider>
+				<Router>
+					<ScrollToTop>
+						<GlobalStyle />
+						<Header pageTitle="POKESTORE" setTheme={setTheme} />
+						<Route exact path="/" component={Home} />
+						<Route path="/profile/:id" component={Profile} />
+						<CheckoutModal />
+						<Footer
+							text={`Pokestore ${new Date().getFullYear()} - Todos os direitos reservados`}
+						/>
+					</ScrollToTop>
+				</Router>
+			</ShopContextProvider>
+		</ThemeProvider>
 	);
 };
 
