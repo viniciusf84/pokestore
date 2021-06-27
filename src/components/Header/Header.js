@@ -12,7 +12,7 @@ import ShopList from '../ShopList';
 // hook
 import { ShopContext } from '../../contexts/ShopContext';
 
-const Header = ({ pageTitle }) => {
+const Header = ({ pageTitle, setTheme }) => {
 	const shopContext = useContext(ShopContext);
 	const { cart, total } = shopContext;
 
@@ -35,7 +35,7 @@ const Header = ({ pageTitle }) => {
 			</HeaderStyled>
 
 			<SubHeader>
-				<ShopList />
+				<ShopList setTheme={setTheme} />
 			</SubHeader>
 		</>
 	);

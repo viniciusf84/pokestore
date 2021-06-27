@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { rem, rgba } from 'polished';
+import { rem, rgba, transitions } from 'polished';
 import { colors } from '../../styles/variables';
 
 export const HeaderStyled = styled.header`
 	padding: 1rem 0rem;
-	background-color: ${colors.primary};
+	background-color: ${(props) => props.theme.colors.primary};
+	${transitions('background-color 0.2s ease-out')};
 
 	.wrapper {
 		display: flex;
@@ -33,5 +34,6 @@ export const HeaderStyled = styled.header`
 `;
 
 export const SubHeader = styled.div`
-	background-color: ${rgba(colors.primary, 0.4)};
+	background-color: ${(props) => rgba(props.theme.colors.primary, 0.4)};
+	${transitions('background-color 0.2s ease-out')};
 `;
