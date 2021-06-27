@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { transitions, darken, rem } from 'polished';
+import { transitions, darken, rem, rgba } from 'polished';
 import { colors } from '../../styles/variables';
 
 export const CartButtonStyled = styled.button`
@@ -12,6 +12,7 @@ export const CartButtonStyled = styled.button`
 	margin-top: 16px;
 	cursor: pointer;
 	${transitions('background-color 0.2s ease-out')};
+	box-shadow: ${rgba(colors.black, 0.2)} 0px 2px 6px;
 
 	svg {
 		margin-right: 8px;
