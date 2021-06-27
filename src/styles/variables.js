@@ -3,7 +3,10 @@
  */
 
 export const colors = {
-	primary: '#282dd7',
+	water: '#282dd7',
+	fire: '#ef5350',
+	ice: '#c4e2f3',
+	electric: '#ec9a29',
 	white: '#fff',
 	red: '#ef5350',
 	black: '#000',
@@ -16,7 +19,6 @@ export const colors = {
 	text_1: '#000000',
 	text_2: '#ffffff',
 	text_3: '#999999',
-	btn_bg: '#32cccc',
 };
 
 /**
