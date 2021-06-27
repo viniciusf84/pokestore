@@ -15,7 +15,7 @@ import { CartItem, TotalSection } from './Cart.styled';
 export default function Cart({ size, list, title, price, image, total }) {
 	const shopContext = useContext(ShopContext);
 
-	const { setResetCart } = shopContext.actions;
+	const { setCheckout } = shopContext.actions;
 
 	const displayCart = useMemo(() => {
 		return list.map((item) => (
@@ -50,7 +50,7 @@ export default function Cart({ size, list, title, price, image, total }) {
 					<CartButton
 						text="Checkout"
 						icon={faCheck}
-						action={() => setResetCart(true)}
+						action={() => setCheckout(true)}
 					/>
 				</TotalSection>
 			</>
