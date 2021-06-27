@@ -49,7 +49,7 @@ export default function HeaderCart({ items, total }) {
 
 			{isOpen && (
 				<CartModal className={emptyCart && 'empty'}>
-					{emptyCart && <p>Seu carrinho está vazio.</p>}
+					{emptyCart && <p>Your shop cart is empty.</p>}
 
 					{!emptyCart && (
 						<Cart
