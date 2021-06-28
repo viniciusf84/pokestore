@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useMemo,
+	useCallback,
+	useRef,
+} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,6 +23,8 @@ import {
 } from './HeaderCart.styled';
 
 export default function HeaderCart({ items, total }) {
+	const node = useRef();
+
 	const [isOpen, setIsOpen] = useState(false);
 	const [formattedArray, setFormattedArray] = useState([]);
 
@@ -30,6 +38,23 @@ export default function HeaderCart({ items, total }) {
 
 	const smoothScroll = useCallback(() => {
 		SmoothScrollTo('header');
+	}, []);
+
+	const handleClick = (e) => {
+		if (node.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		// outside click
+		setIsOpen(false);
+	};
+
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClick);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClick);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -49,6 +74,7 @@ export default function HeaderCart({ items, total }) {
 
 	return (
 		<HeaderCartStyled
+			ref={node}
 			onMouseOver={() => setIsOpen(true)}
 			onMouseLeave={() => setIsOpen(false)}
 		>

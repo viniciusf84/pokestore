@@ -48,7 +48,7 @@ export const CartModal = styled.div`
 
 	position: absolute;
 	right: 0;
-	top: 36px;
+	top: 30px;
 	height: 300px;
 	width: 280px;
 	background-color: ${colors.white};
