@@ -3,10 +3,10 @@
  */
 
 export const colors = {
-	water: '#282dd7',
-	fire: '#ef5350',
-	ice: '#c4e2f3',
-	electric: '#ec9a29',
+	water: '#282CD7',
+	fire: '#D7282D',
+	ice: '#0b2545',
+	electric: '#9728D7',
 	white: '#fff',
 	red: '#ef5350',
 	black: '#000',
