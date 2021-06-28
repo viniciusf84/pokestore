@@ -9,7 +9,7 @@ export const SearchInputStyled = styled.div`
 	input {
 		background: ${colors.white};
 		border: none;
-		padding: 0.6rem;
+		padding: 0.4rem;
 		width: 100%;
 		font-size: ${rem('14px')};
 		font-weight: normal;
@@ -25,7 +25,7 @@ export const SearchInputStyled = styled.div`
 		position: relative;
 		color: ${colors.text_3};
 		float: right;
-		margin: -30px 16px 0 0;
+		margin: -27px 16px 0 0;
 		pointer-events: none;
 		color: ${colors.text_3};
 

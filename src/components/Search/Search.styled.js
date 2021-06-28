@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { colors, fadeIn } from '../../styles/variables';
+import { colors, fadeIn, devices } from '../../styles/variables';
 
 export const SearchResults = styled.section`
 	${fadeIn()};
 
 	position: absolute;
 
-	width: 100%;
+	width: calc(100% - 32px);
 	display: flex;
 	margin-top: -7px;
 	padding: 8px 16px;
@@ -15,6 +15,10 @@ export const SearchResults = styled.section`
 	background-color: ${colors.white};
 
 	animation: fadeIn 0.3s;
+
+	@media ${devices.tablet} {
+		width: 100%;
+	}
 `;
 
 export const SearchItem = styled.div`

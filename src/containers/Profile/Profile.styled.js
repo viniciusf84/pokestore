@@ -37,18 +37,34 @@ export const Details = styled.article`
 		justify-content: space-between;
 		align-items: flex-start;
 		margin-top: 2rem;
+		flex-direction: column-reverse;
+
+		@media ${devices.tablet} {
+			flex-direction: row;
+		}
 
 		.col {
-			width: 50%;
+			width: 100%;
+
+			@media ${devices.tablet} {
+				width: 50%;
+			}
 
 			&__info {
-				width: 70%;
+				width: 100%;
+
+				@media ${devices.tablet} {
+					width: 70%;
+				}
 			}
 
 			&__add {
-				width: 30%;
 				background-color: ${colors.white};
 				padding: 16px 24px;
+
+				@media ${devices.tablet} {
+					width: 50%;
+				}
 
 				span {
 					font-size: ${rem('12px')};
@@ -88,7 +104,11 @@ export const Details = styled.article`
 	}
 
 	.text {
-		margin: 0 30px 0 20px;
+		margin: 0 30px 0 0px;
+
+		@media ${devices.tablet} {
+			margin: 0 30px 0 20px;
+		}
 
 		p {
 			margin-bottom: ${rem('14px')};
