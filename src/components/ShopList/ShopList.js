@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useContext } from 'react';
+import React, { useEffect, useMemo, useContext, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useHistory } from 'react-router-dom';
@@ -12,10 +12,10 @@ import { ShopContext } from '../../contexts/ShopContext';
 // themes
 import { fire, water, ice, electric } from '../../themes';
 
-export default function ShopList({ setTheme }) {
+export default function ShopList({ setTheme, theme }) {
 	const shopContext = useContext(ShopContext);
-	const { shop, selected } = shopContext;
-	const { setShop, setSelectedPokemon } = shopContext.actions;
+	const { selected } = shopContext;
+	const { setSelectedPokemon } = shopContext.actions;
 
 	let history = useHistory();
 
@@ -24,9 +24,8 @@ export default function ShopList({ setTheme }) {
 		[electric, fire, water, ice],
 	);
 
-	const selectShop = useCallback((chosen) => {
-		setShop(chosen.name);
-		setTheme(chosen);
+	const selectTheme = useCallback((item) => {
+		setTheme(item);
 		setSelectedPokemon(null);
 	}, []);
 
@@ -43,8 +42,8 @@ export default function ShopList({ setTheme }) {
 					{list.map((shopItem) => (
 						<li className="shop-item" key={shopItem.name}>
 							<button
-								onClick={() => selectShop(shopItem)}
-								className={shop === shopItem.name ? 'active' : ''}
+								onClick={() => selectTheme(shopItem)}
+								className={theme.name === shopItem.name ? 'active' : ''}
 							>
 								<FontAwesomeIcon icon={shopItem.icon} />
 								{shopItem.name}
