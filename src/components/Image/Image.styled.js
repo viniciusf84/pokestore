@@ -11,6 +11,8 @@ export const ImageStyled = styled.figure`
 		height: 100%;
 		width: 100%;
 
+		object-fit: contain;
+
 		&.hide {
 			display: none;
 		}
