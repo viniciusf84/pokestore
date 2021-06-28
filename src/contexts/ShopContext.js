@@ -84,16 +84,6 @@ const ShopContextProvider = ({ theme, setTheme, children }) => {
 		setTotal(total);
 	}, [cart]);
 
-	// useEffect(() => {
-	// 	const types = selected && selected.types;
-	// 	const findShop =
-	// 		types && selected.types.find((item) => item.type.name === shop);
-
-	// 	if (!findShop) {
-	// 		setTheme(fire);
-	// 	}
-	// }, [selected]);
-
 	useEffect(() => {
 		if (checkout) {
 			setAddToCart([]);
