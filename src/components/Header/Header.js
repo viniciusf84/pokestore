@@ -19,18 +19,32 @@ const Header = ({ pageTitle, setTheme, theme }) => {
 	return (
 		<>
 			<HeaderStyled id="header">
-				<div className="wrapper container-fluid">
-					<div className="brand start-xs">
-						<h1 className="page-title">
+				<div className="mobile">
+					<div className="wrapper">
+						<div className="brand start-xs">
 							<Link to="/">{pageTitle}</Link>
-						</h1>
+						</div>
+
+						<HeaderCart items={cart} total={total} />
 					</div>
 
 					<div className="search-wrapper">
 						<Search />
 					</div>
+				</div>
 
-					<HeaderCart items={cart} total={total} />
+				<div className="desktop">
+					<div className="wrapper container-fluid">
+						<div className="brand start-xs">
+							<Link to="/">{pageTitle}</Link>
+						</div>
+
+						<div className="search-wrapper">
+							<Search />
+						</div>
+
+						<HeaderCart items={cart} total={total} />
+					</div>
 				</div>
 			</HeaderStyled>
 

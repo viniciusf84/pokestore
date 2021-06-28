@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem, rgba, transitions } from 'polished';
-import { colors } from '../../styles/variables';
+import { colors, devices } from '../../styles/variables';
 
 export const HeaderStyled = styled.header`
 	padding: 1rem 0rem;
@@ -16,6 +16,9 @@ export const HeaderStyled = styled.header`
 	}
 
 	.brand {
+		font-size: ${rem('22px')};
+		font-weight: bold;
+		text-shadow: ${colors.blue} 2px 3px 0px;
 		border-radius: 4px;
 		padding: 0 10px 0 0;
 		height: 30px;
@@ -28,9 +31,30 @@ export const HeaderStyled = styled.header`
 		position: relative;
 	}
 
-	h1 {
-		font-size: ${rem('22px')};
-		text-shadow: ${colors.blue} 2px 3px 0px;
+	.desktop {
+		display: none;
+
+		@media ${devices.tablet} {
+			display: block;
+		}
+	}
+
+	.mobile {
+		display: block;
+
+		.wrapper {
+			justify-content: space-between;
+		}
+
+		.search-wrapper {
+			width: 100%;
+			padding: 0 16px;
+			margin-top: 8px;
+		}
+
+		@media ${devices.tablet} {
+			display: none;
+		}
 	}
 `;
 
