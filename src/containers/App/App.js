@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 // components
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import ScrollButton from '../../components/ScrollButton';
 
 // pages
 import CheckoutModal from '../CheckoutModal';
@@ -37,6 +38,7 @@ const App = () => {
 						<Route exact path="/" component={Home} />
 						<Route path="/profile/:id" component={Profile} />
 						<CheckoutModal />
+						<ScrollButton />
 						<Footer
 							text={`Pokestore ${new Date().getFullYear()} - Todos os direitos reservados`}
 						/>
