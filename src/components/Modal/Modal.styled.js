@@ -22,8 +22,8 @@ export const ModalStyled = styled.div`
 	.content {
 		background-color: ${colors.white};
 		width: 600px;
-		height: 50vh;
-		max-height: 400px;
+		height: 65vh;
+		max-height: 420px;
 		border-radius: 4px;
 		box-shadow: ${rgba(colors.black, 0.2)} 0px 2px 6px;
 		margin: 24px;
