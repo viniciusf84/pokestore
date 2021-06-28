@@ -25,6 +25,7 @@ export const HeaderStyled = styled.header`
 
 	.search-wrapper {
 		width: 67%;
+		position: relative;
 	}
 
 	h1 {
