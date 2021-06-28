@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 // components
@@ -31,7 +31,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<ShopContextProvider setTheme={setTheme} theme={theme}>
-				<Router>
+				<Router basename="/pokestore">
 					<ScrollToTop>
 						<GlobalStyle />
 						<Header pageTitle="POKESTORE" setTheme={setTheme} theme={theme} />
