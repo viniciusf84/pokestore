@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,6 +7,7 @@ import Cart from '../Cart';
 
 // utils
 import GroupArrayByKey from '../../utils/GroupArrayByKey';
+import SmoothScrollTo from '../../utils/SmoothScrollTo';
 
 // styles
 import {
@@ -27,6 +28,10 @@ export default function HeaderCart({ items, total }) {
 		return true;
 	}, [items]);
 
+	const smoothScroll = useCallback(() => {
+		SmoothScrollTo('header');
+	}, []);
+
 	useEffect(() => {
 		const grouped = GroupArrayByKey(items, 'id');
 		const groupedArray = Object.values(grouped).map((item) => ({
@@ -37,18 +42,23 @@ export default function HeaderCart({ items, total }) {
 		setFormattedArray(groupedArray);
 	}, [items]);
 
+	useEffect(() => {
+		setIsOpen(true);
+		smoothScroll('header');
+	}, [formattedArray]);
+
 	return (
 		<HeaderCartStyled
 			onMouseOver={() => setIsOpen(true)}
 			onMouseLeave={() => setIsOpen(false)}
 		>
-			<HeaderCartButton className={isOpen && 'hover'}>
+			<HeaderCartButton className={isOpen ? 'hover' : ''}>
 				<FontAwesomeIcon icon={faShoppingCart} />
 				<span>{items.length}</span>
 			</HeaderCartButton>
 
 			{isOpen && (
-				<CartModal className={emptyCart && 'empty'}>
+				<CartModal className={emptyCart ? 'empty' : ''}>
 					{emptyCart && <p>Your shop cart is empty.</p>}
 
 					{!emptyCart && (

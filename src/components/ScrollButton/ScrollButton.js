@@ -2,17 +2,15 @@ import React, { useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
+// utils
+import SmoothScrollTo from '../../utils/SmoothScrollTo';
+
 // styles
 import { ButtonStyled } from './ScrollButton.styled';
 
 export default function ScrollButton() {
 	const smoothScroll = useCallback(() => {
-		const element = document.getElementById('header');
-		if (element) {
-			element.scrollIntoView({
-				behavior: 'smooth',
-			});
-		}
+		SmoothScrollTo('header');
 	}, []);
 
 	return (
