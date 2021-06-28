@@ -48,9 +48,9 @@ export default function Search() {
 		setIsLoading(false);
 	}, []);
 
-	const onHandleChange = useCallback((value) => {
+	const onSetNewSearch = useCallback((value) => {
 		setSearch(value);
-		getSearchResults(value);
+		getSearchResults(value.toLowerCase());
 	}, []);
 
 	const getImage = useMemo(() => {
@@ -73,7 +73,7 @@ export default function Search() {
 			<SearchInput
 				name="search-input"
 				placeholder="Search for your favorite pokemon"
-				onChange={(e) => onHandleChange(e.target.value)}
+				onSearch={(e) => onSetNewSearch(e)}
 			/>
 
 			{display && (
@@ -93,6 +93,7 @@ export default function Search() {
 								onClick={() => selectItem({ ...result, image: getImage })}
 							>
 								<Image src={getImage} alt={result.name} />
+
 								<p>{result.name}</p>
 							</SearchItem>
 						)}

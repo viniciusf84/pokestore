@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { rem } from 'polished';
+import { rem, transitions } from 'polished';
 import { colors } from '../../styles/variables';
 
 export const SearchInputStyled = styled.div`
@@ -26,8 +26,12 @@ export const SearchInputStyled = styled.div`
 		color: ${colors.text_3};
 		float: right;
 		margin: -27px 16px 0 0;
-		pointer-events: none;
 		color: ${colors.text_3};
+		${transitions('color 0.2s ease-out')};
+
+		&:hover {
+			color: ${colors.text_1};
+		}
 
 		svg {
 			width: 0.9rem;
