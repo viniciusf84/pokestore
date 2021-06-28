@@ -6,9 +6,8 @@ import { getPokemonByType } from '../services';
 
 const ShopContext = createContext();
 
-const ShopContextProvider = (props) => {
+const ShopContextProvider = ({ theme, setTheme, children }) => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [shop, setShop] = useLocalState('shop', 'electric');
 	const [shopData, setShopData] = useLocalState('data', []);
 	const [selected, setSelectedPokemon] = useLocalState('selected', null);
 	const [message, setMessage] = useLocalState('message', '');
@@ -18,9 +17,10 @@ const ShopContextProvider = (props) => {
 	const [checkout, setCheckout] = useState(false);
 	const [resetCart, setResetCart] = useState(false);
 
+	const shop = theme.name;
+
 	const state = {
 		isLoading,
-		shop,
 		shopData,
 		selected,
 		message,
@@ -33,7 +33,6 @@ const ShopContextProvider = (props) => {
 
 	const actions = {
 		setIsLoading,
-		setShop,
 		setShopData,
 		setSelectedPokemon,
 		setMessage,
@@ -53,7 +52,8 @@ const ShopContextProvider = (props) => {
 			setShopData(response.data.pokemon);
 			setMessage(`${searchStr} Pokemón shop`);
 		} catch (error) {
-			setMessage(error);
+			setMessage('Error on get Pokemón.');
+			setShopData([]);
 			console.error(error);
 		}
 
@@ -75,17 +75,24 @@ const ShopContextProvider = (props) => {
 	}, [shopData, shop]);
 
 	useEffect(() => {
-		if (shop) {
-			getResults(shop);
-		}
+		getResults(shop);
 	}, [shop]);
 
 	useEffect(() => {
 		const total = getTotal();
 
 		setTotal(total);
-		// setDisplayToast(true);
 	}, [cart]);
+
+	// useEffect(() => {
+	// 	const types = selected && selected.types;
+	// 	const findShop =
+	// 		types && selected.types.find((item) => item.type.name === shop);
+
+	// 	if (!findShop) {
+	// 		setTheme(fire);
+	// 	}
+	// }, [selected]);
 
 	useEffect(() => {
 		if (checkout) {
@@ -99,7 +106,7 @@ const ShopContextProvider = (props) => {
 
 	return (
 		<ShopContext.Provider value={{ ...state, actions: actions }}>
-			{props.children}
+			{children}
 		</ShopContext.Provider>
 	);
 };
