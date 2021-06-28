@@ -19,7 +19,7 @@ export default function Cart({ size, list, title, price, image, total }) {
 
 	const displayCart = useMemo(() => {
 		return list.map((item) => (
-			<CartItem>
+			<CartItem key={item.item[title]}>
 				<Image src={item.item[image]} alt={item.item[title]} />
 
 				<div className="text">
@@ -47,6 +47,7 @@ export default function Cart({ size, list, title, price, image, total }) {
 					<div>
 						<span>Total:</span> <strong>${total}</strong>
 					</div>
+
 					<CartButton
 						text="Checkout"
 						icon={faCheck}
