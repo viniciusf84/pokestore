@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { colors } from './variables';
+import { colors, devices } from './variables';
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -54,8 +54,11 @@ export const GlobalStyle = createGlobalStyle`
   .wrapper {
     margin: 0 auto;
     max-width: 1200px;
-    padding: 0 30px;
+    padding: 0 16px;
+
+    @media ${devices.tablet} {
+      padding: 0 32px;
+    }
   }
   
-`
-
+`;
