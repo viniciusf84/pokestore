@@ -22,8 +22,9 @@ export const ResultList = styled.section`
       content: '';
       background-color: ${(props) => props.theme.colors.primary};
       width: 100px;
-      height: 10px;
+      height: 8px;
       display: block;
+      margin-top: 4px;
     }
 	}
 

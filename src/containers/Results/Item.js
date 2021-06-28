@@ -14,6 +14,9 @@ import { ShopContext } from '../../contexts/ShopContext';
 import LoadingContent from '../../components/LoadingContent';
 import Image from '../../components/Image';
 
+// utils
+import GetImageUrl from '../../utils/GetImageUrl';
+
 // service
 import { getPokemonByUrl } from '../../services';
 
@@ -24,7 +27,6 @@ function Item({ name, pokemonUrl }) {
 	let history = useHistory();
 
 	const shopContext = useContext(ShopContext);
-	const { selected } = shopContext;
 	const { setSelectedPokemon, setMessage } = shopContext.actions;
 
 	useEffect(() => {
@@ -36,7 +38,7 @@ function Item({ name, pokemonUrl }) {
 
 				setPokemonData(response.data);
 			} catch (error) {
-				setMessage(error);
+				setMessage('Error on get Pokemón details.');
 				console.error(error);
 			}
 
@@ -47,13 +49,7 @@ function Item({ name, pokemonUrl }) {
 	}, [pokemonUrl]);
 
 	const getImage = useMemo(() => {
-		const imageUrl =
-			pokemonData &&
-			pokemonData.sprites &&
-			(pokemonData.sprites.other['official-artwork'].front_default ||
-				pokemonData.sprites.front_default);
-
-		return imageUrl;
+		return GetImageUrl(pokemonData);
 	}, [pokemonData]);
 
 	const selectItem = useCallback((data) => {

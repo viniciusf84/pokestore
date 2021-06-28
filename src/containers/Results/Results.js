@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useContext } from 'react';
+import React, { useEffect, useCallback, useContext } from 'react';
 
 // hooks
 import { ShopContext } from '../../contexts/ShopContext';
@@ -19,14 +19,13 @@ function Results() {
 		setSelectedPokemon('null');
 	}, []);
 
-	const displayPokemonList = useMemo(() => {
-		return (
-			shopData &&
-			shopData.length > 0 && (
+	const displayPokemonList = useCallback((shop, title) => {
+		if (shop && shop.length > 0 && title) {
+			return (
 				<>
-					<h1 className="page-title">{message}</h1>
+					<h1 className="page-title">{title}</h1>
 
-					{shopData.map((character) => (
+					{shop.map((character) => (
 						<Item
 							key={character.pokemon.name}
 							name={character.pokemon.name}
@@ -34,14 +33,18 @@ function Results() {
 						/>
 					))}
 				</>
-			)
-		);
-	}, [shopData, message]);
+			);
+		}
+
+		return;
+	}, []);
 
 	return (
 		<div className="wrapper container-fluid">
 			<LoadingContent isLoading={isLoading} loadingText="Loading results">
-				<ResultList id="results">{displayPokemonList}</ResultList>
+				<ResultList id="results">
+					{displayPokemonList(shopData, message)}
+				</ResultList>
 			</LoadingContent>
 		</div>
 	);
