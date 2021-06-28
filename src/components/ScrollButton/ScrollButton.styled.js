@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { rem, rgba } from 'polished';
+import { rem, rgba, darken, transitions } from 'polished';
 import { colors } from '../../styles/variables';
 
 export const ButtonStyled = styled.button`
@@ -13,9 +13,16 @@ export const ButtonStyled = styled.button`
 	display: block;
 	width: 42px;
 	height: 42px;
+	cursor: pointer;
 
 	position: fixed;
 	left: calc(96% - 43px);
 	bottom: 10%;
 	z-index: 10;
+
+	${transitions('color 0.2s ease-out')};
+
+	&:hover {
+		color: ${(props) => darken(0.2, props.theme.colors.primary)};
+	}
 `;

@@ -15,7 +15,7 @@ export default function ScrollButton() {
 
 	return (
 		<ButtonStyled onClick={() => smoothScroll()}>
-			<FontAwesomeIcon icon={faArrowUp} size={24} />
+			<FontAwesomeIcon icon={faArrowUp} />
 		</ButtonStyled>
 	);
 }
