@@ -1,11 +1,11 @@
 {
-  "main.js": "./static/js/main.91691ecc.chunk.js",
-  "main.js.map": "./static/js/main.91691ecc.chunk.js.map",
-  "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
-  "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
-  "static/js/2.4a12118a.chunk.js": "./static/js/2.4a12118a.chunk.js",
-  "static/js/2.4a12118a.chunk.js.map": "./static/js/2.4a12118a.chunk.js.map",
-  "index.html": "./index.html",
-  "precache-manifest.7d9069e2e3ba6e6b0346a1b3d7ae6a8e.js": "./precache-manifest.7d9069e2e3ba6e6b0346a1b3d7ae6a8e.js",
-  "service-worker.js": "./service-worker.js"
+  "main.js": "/pokestore/static/js/main.789a8586.chunk.js",
+  "main.js.map": "/pokestore/static/js/main.789a8586.chunk.js.map",
+  "runtime~main.js": "/pokestore/static/js/runtime~main.e6c1de86.js",
+  "runtime~main.js.map": "/pokestore/static/js/runtime~main.e6c1de86.js.map",
+  "static/js/2.dd2240d6.chunk.js": "/pokestore/static/js/2.dd2240d6.chunk.js",
+  "static/js/2.dd2240d6.chunk.js.map": "/pokestore/static/js/2.dd2240d6.chunk.js.map",
+  "index.html": "/pokestore/index.html",
+  "precache-manifest.a74784ca13c66b8efd2c565e1cea2b4a.js": "/pokestore/precache-manifest.a74784ca13c66b8efd2c565e1cea2b4a.js",
+  "service-worker.js": "/pokestore/service-worker.js"
 }
