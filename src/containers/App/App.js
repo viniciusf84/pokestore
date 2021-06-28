@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -29,11 +29,11 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<ShopContextProvider>
+			<ShopContextProvider setTheme={setTheme} theme={theme}>
 				<Router>
 					<ScrollToTop>
 						<GlobalStyle />
-						<Header pageTitle="POKESTORE" setTheme={setTheme} />
+						<Header pageTitle="POKESTORE" setTheme={setTheme} theme={theme} />
 						<Route exact path="/" component={Home} />
 						<Route path="/profile/:id" component={Profile} />
 						<CheckoutModal />
