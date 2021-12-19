@@ -9,7 +9,7 @@ export const SearchResults = styled.section`
 
 	width: calc(100% - 32px);
 	display: flex;
-	margin-top: -7px;
+	margin-top: -4px;
 	padding: 8px 16px;
 
 	background-color: ${colors.white};
