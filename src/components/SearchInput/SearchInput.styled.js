@@ -22,20 +22,29 @@ export const SearchInputStyled = styled.div`
 	}
 
 	.icon__wrapper {
-		position: relative;
+		background-color: transparent;
+		border: none;
 		color: ${colors.text_3};
+		cursor: pointer;
 		float: right;
-		margin: -27px 16px 0 0;
-		color: ${colors.text_3};
+		margin: -28px 8px 0 0;
+		position: relative;
+
 		${transitions('color 0.2s ease-out')};
 
-		&:hover {
-			color: ${colors.text_1};
+		&:disabled {
+			color: ${colors.text_3};
+			cursor: none;
+		}
+
+		&:not([disabled]) {
+			&:hover {
+				color: ${colors.text_1};
+			}
 		}
 
 		svg {
 			width: 0.9rem;
-			cursor: pointer;
 		}
 	}
 `;
