@@ -78,6 +78,7 @@ export default function Search() {
 
 			{display && (
 				<SearchResults
+					data-testid="search-results"
 					style={{ justifyContent: isLoading ? 'center' : 'flex-start' }}
 					onClick={() => {
 						setDisplay(false);
