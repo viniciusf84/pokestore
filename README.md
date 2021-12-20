@@ -23,3 +23,9 @@ yarn install
 ```
 yarn start
 ```
+
+4. Run tests
+
+```
+yarn test
+```
