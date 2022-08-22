@@ -1,84 +1,84 @@
 import React, {
-	useState,
-	useEffect,
-	useMemo,
-	useContext,
-	useCallback,
-} from 'react';
-import { useHistory } from 'react-router';
+  useState,
+  useEffect,
+  useMemo,
+  useContext,
+  useCallback,
+} from "react";
+import { useHistory } from "react-router";
 
 // hook
-import { ShopContext } from '../../contexts/ShopContext';
+import { ShopContext } from "../../contexts/ShopContext";
 
 // components
-import LoadingContent from '../../components/LoadingContent';
-import Image from '../../components/Image';
+import LoadingContent from "../../components/LoadingContent";
+import Image from "../../components/Image";
 
 // utils
-import GetImageUrl from '../../utils/GetImageUrl';
+import GetImageUrl from "../../utils/GetImageUrl";
 
 // service
-import { getPokemonByUrl } from '../../services';
+import { getPokemonByUrl } from "../../services";
 
 function Item({ name, pokemonUrl }) {
-	const [isLoadingContent, setIsLoadingContent] = useState(true);
-	const [pokemonData, setPokemonData] = useState({});
+  const [isLoadingContent, setIsLoadingContent] = useState(true);
+  const [pokemonData, setPokemonData] = useState({});
 
-	let history = useHistory();
+  let history = useHistory();
 
-	const shopContext = useContext(ShopContext);
-	const { setSelectedPokemon, setMessage } = shopContext.actions;
+  const shopContext = useContext(ShopContext);
+  const { setSelectedPokemon, setMessage } = shopContext.actions;
 
-	useEffect(() => {
-		async function getPokemonDataByUrl(url) {
-			setIsLoadingContent(true);
+  useEffect(() => {
+    async function getPokemonDataByUrl(url) {
+      setIsLoadingContent(true);
 
-			try {
-				const response = await getPokemonByUrl(url);
+      try {
+        const response = await getPokemonByUrl(url);
 
-				setPokemonData(response.data);
-			} catch (error) {
-				setMessage('Error on get Pokemón details.');
-				console.error(error);
-			}
+        setPokemonData(response.data);
+      } catch (error) {
+        setMessage("Error on get Pokemón details.");
+        console.error(error);
+      }
 
-			setIsLoadingContent(false);
-		}
+      setIsLoadingContent(false);
+    }
 
-		getPokemonDataByUrl(pokemonUrl);
-	}, [pokemonUrl]);
+    getPokemonDataByUrl(pokemonUrl);
+  }, [pokemonUrl]);
 
-	const getImage = useMemo(() => {
-		return GetImageUrl(pokemonData);
-	}, [pokemonData]);
+  const getImage = useMemo(() => {
+    return GetImageUrl(pokemonData);
+  }, [pokemonData]);
 
-	const selectItem = useCallback((data) => {
-		setSelectedPokemon(data);
-		history.push(`/profile/${data.name}`);
-	}, []);
+  const selectItem = useCallback((data) => {
+    setSelectedPokemon(data);
+    history.push(`/profile/${data.name}`);
+  }, []);
 
-	return (
-		<div
-			className="item"
-			onClick={() => selectItem({ ...pokemonData, image: getImage })}
-		>
-			<LoadingContent
-				isLoading={isLoadingContent}
-				loadingText={`Loading ${name.toUpperCase()}`}
-			>
-				<div className="wrap  img__wrapper">
-					<Image src={getImage} alt={name} />
-				</div>
+  return (
+    <div
+      className="item"
+      onClick={() => selectItem({ ...pokemonData, image: getImage })}
+    >
+      <LoadingContent
+        isLoading={isLoadingContent}
+        loadingText={`Loading ${name.toUpperCase()}`}
+      >
+        <div className="wrap  img__wrapper">
+          <Image src={getImage} alt={name} />
+        </div>
 
-				<div className="text">
-					<span className="title">{name}</span>
+        <div className="text">
+          <span className="title">{name}</span>
 
-					{/* Base experience replaces price   */}
-					<span className="price">${pokemonData.base_experience}</span>
-				</div>
-			</LoadingContent>
-		</div>
-	);
+          {/* Base experience replaces price   */}
+          <span className="price">${pokemonData.base_experience}</span>
+        </div>
+      </LoadingContent>
+    </div>
+  );
 }
 
 export default Item;

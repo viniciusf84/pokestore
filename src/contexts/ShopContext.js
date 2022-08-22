@@ -1,104 +1,104 @@
-import React, { useState, createContext, useEffect, useCallback } from 'react';
-import useLocalState from '../utils/UseLocalState';
+import React, { useState, createContext, useEffect, useCallback } from "react";
+import useLocalState from "../utils/UseLocalState";
 
 // service
-import { getPokemonByType } from '../services';
+import { getPokemonByType } from "../services";
 
 const ShopContext = createContext();
 
 const ShopContextProvider = ({ theme, setTheme, children }) => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [shopData, setShopData] = useLocalState('data', []);
-	const [selected, setSelectedPokemon] = useLocalState('selected', null);
-	const [message, setMessage] = useLocalState('message', '');
-	const [cart, setAddToCart] = useLocalState('cart', []);
-	const [displayToast, setDisplayToast] = useState(false);
-	const [total, setTotal] = useLocalState('total', 0);
-	const [checkout, setCheckout] = useState(false);
-	const [resetCart, setResetCart] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [shopData, setShopData] = useLocalState("data", []);
+  const [selected, setSelectedPokemon] = useLocalState("selected", null);
+  const [message, setMessage] = useLocalState("message", "");
+  const [cart, setAddToCart] = useLocalState("cart", []);
+  const [displayToast, setDisplayToast] = useState(false);
+  const [total, setTotal] = useLocalState("total", 0);
+  const [checkout, setCheckout] = useState(false);
+  const [resetCart, setResetCart] = useState(false);
 
-	const shop = theme.name;
+  const shop = theme.name;
 
-	const state = {
-		isLoading,
-		shopData,
-		selected,
-		message,
-		cart,
-		displayToast,
-		total,
-		checkout,
-		resetCart,
-	};
+  const state = {
+    isLoading,
+    shopData,
+    selected,
+    message,
+    cart,
+    displayToast,
+    total,
+    checkout,
+    resetCart,
+  };
 
-	const actions = {
-		setIsLoading,
-		setShopData,
-		setSelectedPokemon,
-		setMessage,
-		setAddToCart,
-		setDisplayToast,
-		setTotal,
-		setCheckout,
-		setResetCart,
-	};
+  const actions = {
+    setIsLoading,
+    setShopData,
+    setSelectedPokemon,
+    setMessage,
+    setAddToCart,
+    setDisplayToast,
+    setTotal,
+    setCheckout,
+    setResetCart,
+  };
 
-	const getResults = useCallback(async (searchStr) => {
-		setIsLoading(true);
+  const getResults = useCallback(async (searchStr) => {
+    setIsLoading(true);
 
-		try {
-			const response = await getPokemonByType(searchStr);
+    try {
+      const response = await getPokemonByType(searchStr);
 
-			setShopData(response.data.pokemon);
-			setMessage(`${searchStr} Pokemón shop`);
-		} catch (error) {
-			setMessage('Error on get Pokemón.');
-			setShopData([]);
-			console.error(error);
-		}
+      setShopData(response.data.pokemon);
+      setMessage(`${searchStr} Pokemón shop`);
+    } catch (error) {
+      setMessage("Error on get Pokemón.");
+      setShopData([]);
+      console.error(error);
+    }
 
-		setIsLoading(false);
-	}, []);
+    setIsLoading(false);
+  }, []);
 
-	const getTotal = useCallback(() => {
-		const cartTotal = cart.reduce(function (total, current) {
-			return total + current.base_experience;
-		}, 0);
+  const getTotal = useCallback(() => {
+    const cartTotal = cart.reduce(function (total, current) {
+      return total + current.base_experience;
+    }, 0);
 
-		return cartTotal;
-	}, [cart]);
+    return cartTotal;
+  }, [cart]);
 
-	useEffect(() => {
-		if (shopData && shopData.length > 0) {
-			setMessage(`${shop} Pokemón shop`);
-		}
-	}, [shopData, shop]);
+  useEffect(() => {
+    if (shopData && shopData.length > 0) {
+      setMessage(`${shop} Pokemón shop`);
+    }
+  }, [shopData, shop]);
 
-	useEffect(() => {
-		getResults(shop);
-	}, [shop]);
+  useEffect(() => {
+    getResults(shop);
+  }, [shop]);
 
-	useEffect(() => {
-		const total = getTotal();
+  useEffect(() => {
+    const total = getTotal();
 
-		setTotal(total);
-	}, [cart]);
+    setTotal(total);
+  }, [cart]);
 
-	useEffect(() => {
-		if (checkout) {
-			setAddToCart([]);
-			setTotal(0);
-			setResetCart(true);
-			setResetCart(false);
-			setSelectedPokemon(null);
-		}
-	}, [checkout]);
+  useEffect(() => {
+    if (checkout) {
+      setAddToCart([]);
+      setTotal(0);
+      setResetCart(true);
+      setResetCart(false);
+      setSelectedPokemon(null);
+    }
+  }, [checkout]);
 
-	return (
-		<ShopContext.Provider value={{ ...state, actions: actions }}>
-			{children}
-		</ShopContext.Provider>
-	);
+  return (
+    <ShopContext.Provider value={{ ...state, actions: actions }}>
+      {children}
+    </ShopContext.Provider>
+  );
 };
 
 export { ShopContext, ShopContextProvider };

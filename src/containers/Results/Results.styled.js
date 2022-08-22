@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { rem, transitions, rgba } from 'polished';
-import { colors, centerContent, fadeIn, devices } from '../../styles/variables';
+import styled from "styled-components";
+import { rem, transitions, rgba } from "polished";
+import { colors, centerContent, fadeIn, devices } from "../../styles/variables";
 
 export const ResultList = styled.section` 
   ${fadeIn()}
@@ -11,7 +11,7 @@ export const ResultList = styled.section`
   gap: 3%;
 
 	.page-title {
-    font-size: ${rem('24px')};
+    font-size: ${rem("24px")};
     font-weight: 700;
 		display: block;
 		width: 100%;
@@ -58,7 +58,7 @@ export const ResultList = styled.section`
 			position: relative;
 			height: 250px;
 			cursor: pointer;
-			${transitions('background-color 0.2s ease-out')};
+			${transitions("background-color 0.2s ease-out")};
 		}
 		
 		.img__wrapper {			
@@ -70,9 +70,9 @@ export const ResultList = styled.section`
 				object-fit: contain;
         animation: fadeIn 0.3s;
         ${transitions([
-					'transform 0.5s ease-out',
-					'opacity .3s ease-in',
-				])};      
+          "transform 0.5s ease-out",
+          "opacity .3s ease-in",
+        ])};      
 			}
 		}
 
@@ -84,7 +84,7 @@ export const ResultList = styled.section`
 
       span {
         display: block;
-        font-size: ${rem('16px')};
+        font-size: ${rem("16px")};
         padding: 10px 12px;
         margin: 0;
         text-transform: capitalize;

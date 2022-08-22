@@ -1,69 +1,69 @@
-import styled, { css } from 'styled-components';
-import { colors } from '../../styles/variables';
+import styled, { css } from "styled-components";
+import { colors } from "../../styles/variables";
 
 const toastTypeVariations = {
-	info: css`
-		background: ${colors.blue};
-	`,
+  info: css`
+    background: ${colors.blue};
+  `,
 
-	success: css`
-		background: ${colors.green};
-	`,
+  success: css`
+    background: ${colors.green};
+  `,
 
-	error: css`
-		background: ${colors.red};
-	`,
+  error: css`
+    background: ${colors.red};
+  `,
 };
 
 export const Container = styled.div`
-	width: 360px;
-	position: relative;
-	padding: 16px 30px;
-	border-radius: 10px;
-	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  width: 360px;
+  position: relative;
+  padding: 16px 30px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 
-	display: flex;
+  display: flex;
 
-	color: ${colors.white};
+  color: ${colors.white};
 
-	${(props) => toastTypeVariations[props.type || 'info']}
+  ${(props) => toastTypeVariations[props.type || "info"]}
 
-	& + div {
-		margin-top: 8px;
-	}
+  & + div {
+    margin-top: 8px;
+  }
 
-	> svg {
-		margin: 4px 12px 0 0;
-	}
+  > svg {
+    margin: 4px 12px 0 0;
+  }
 
-	div {
-		flex: 1;
+  div {
+    flex: 1;
 
-		p {
-			margin-top: 4px;
-			font-size: 14px;
-			opacity: 0.8;
-			line-height: 20px;
-		}
-	}
+    p {
+      margin-top: 4px;
+      font-size: 14px;
+      opacity: 0.8;
+      line-height: 20px;
+    }
+  }
 
-	button {
-		position: absolute;
-		right: 8px;
-		top: 15px;
-		opacity: 0.6;
-		border: 0;
-		background: transparent;
-		color: inherit;
-	}
+  button {
+    position: absolute;
+    right: 8px;
+    top: 15px;
+    opacity: 0.6;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
 
-	${(props) =>
-		!props.hasDescription &&
-		css`
-			align-items: center;
+  ${(props) =>
+    !props.hasDescription &&
+    css`
+      align-items: center;
 
-			svg {
-				margin-top: 0;
-			}
-		`}
+      svg {
+        margin-top: 0;
+      }
+    `}
 `;

@@ -1,19 +1,18 @@
-import Api from './Api';
-import axios from 'axios';
-
+import Api from "./Api";
+import axios from "axios";
 
 export function getPokemonByName(query) {
-	return Api(`pokemon/${query}`);
+  return Api(`pokemon/${query}`);
 }
 
 export function getPokemonByType(query) {
-	return Api(`type/${query}`);
+  return Api(`type/${query}`);
 }
 
 export function getPokemonById(id) {
-	return Api(`pokemon/${id}`);
+  return Api(`pokemon/${id}`);
 }
 
 export function getPokemonByUrl(url) {
-	return axios.get(url);
+  return axios.get(url);
 }
