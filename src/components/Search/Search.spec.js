@@ -5,6 +5,7 @@ import { ShopContextProvider } from "../../contexts/ShopContext";
 import { electric } from "../../themes";
 import userEvent from "@testing-library/user-event";
 import Search from "./Search";
+import { toBeInTheDocument } from "@testing-library/jest-dom";
 
 const searchResults = "search-results";
 const searchInput = "search-input";
