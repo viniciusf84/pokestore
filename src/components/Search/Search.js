@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   useMemo,
+  useRef,
 } from "react";
 import { useHistory } from "react-router";
 
@@ -35,6 +36,8 @@ export default function Search() {
 
   const history = useHistory();
 
+  const searchResultsRef = useRef(null);
+
   const getSearchResults = useCallback(async (str) => {
     setIsLoading(true);
     try {
@@ -60,7 +63,40 @@ export default function Search() {
   const selectItem = useCallback((data) => {
     setSelectedPokemon(data);
     history.push(`/profile/${data.name}`);
+
+    // closes the search result section
+    setDisplay(false);
+    setSearch("");
   }, []);
+
+  const handleClickOutside = (event) => {
+    if (
+      searchResultsRef.current &&
+      !searchResultsRef.current.contains(event.target)
+    ) {
+      setDisplay(false);
+      setSearch(null);
+    }
+  };
+
+  const onEscPressed = (event) => {
+    if (event.key === "Escape") {
+      setDisplay(false);
+      setSearch(null);
+    }
+  };
+
+  useEffect(() => {
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", onEscPressed, false);
+
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", onEscPressed, false);
+    };
+  }, [searchResultsRef]);
 
   useEffect(() => {
     if (search) {
@@ -79,11 +115,8 @@ export default function Search() {
       {display && (
         <SearchResults
           data-testid="search-results"
+          ref={searchResultsRef}
           style={{ justifyContent: isLoading ? "center" : "flex-start" }}
-          onClick={() => {
-            setDisplay(false);
-            setSearch("");
-          }}
         >
           <LoadingContent
             isLoading={isLoading}
@@ -92,6 +125,7 @@ export default function Search() {
             {result && (
               <SearchItem
                 onClick={() => selectItem({ ...result, image: getImage })}
+                tabindex="0"
               >
                 <Image src={getImage} alt={result.name} />
 
