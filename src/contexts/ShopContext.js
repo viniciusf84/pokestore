@@ -60,14 +60,6 @@ const ShopContextProvider = ({ theme, setTheme, children }) => {
     setIsLoading(false);
   }, []);
 
-  const getTotal = useCallback(() => {
-    const cartTotal = cart.reduce(function (total, current) {
-      return total + current.base_experience;
-    }, 0);
-
-    return cartTotal;
-  }, [cart]);
-
   useEffect(() => {
     if (shopData && shopData.length > 0) {
       setMessage(`${shop} Pokemón shop`);
@@ -79,9 +71,15 @@ const ShopContextProvider = ({ theme, setTheme, children }) => {
   }, [shop]);
 
   useEffect(() => {
-    const total = getTotal();
+    const getTotal = () => {
+      const cartTotal = cart.reduce(function (total, current) {
+        return total + current.base_experience;
+      }, 0);
 
-    setTotal(total);
+      return cartTotal;
+    };
+
+    setTotal(getTotal());
   }, [cart]);
 
   useEffect(() => {
