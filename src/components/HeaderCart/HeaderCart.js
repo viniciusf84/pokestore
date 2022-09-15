@@ -10,6 +10,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 // components
 import Cart from "../Cart";
+import ShadowStyled from "../Shadow";
 
 // utils
 import GroupArrayByKey from "../../utils/GroupArrayByKey";
@@ -25,7 +26,7 @@ import {
 export default function HeaderCart({ items, total }) {
   const node = useRef();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [formattedArray, setFormattedArray] = useState([]);
 
   const emptyCart = useMemo(() => {
@@ -84,19 +85,23 @@ export default function HeaderCart({ items, total }) {
       </HeaderCartButton>
 
       {isOpen && (
-        <CartModal className={emptyCart ? "empty" : ""}>
-          {emptyCart && <p>Your shop cart is empty.</p>}
+        <>
+          <CartModal className={emptyCart ? "empty" : ""}>
+            {emptyCart && <p>Your shop cart is empty.</p>}
 
-          {!emptyCart && (
-            <Cart
-              list={formattedArray}
-              title="name"
-              price="base_experience"
-              image="image"
-              total={total}
-            />
-          )}
-        </CartModal>
+            {!emptyCart && (
+              <Cart
+                list={formattedArray}
+                title="name"
+                price="base_experience"
+                image="image"
+                total={total}
+              />
+            )}
+          </CartModal>
+
+          <ShadowStyled onClick={() => setIsOpen(false)} />
+        </>
       )}
     </HeaderCartStyled>
   );
