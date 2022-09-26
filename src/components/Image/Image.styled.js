@@ -4,12 +4,13 @@ import { placeHolderShimmer } from "../../styles/variables";
 export const ImageStyled = styled.figure`
   ${placeHolderShimmer()}
   position: relative;
-  height: 100%;
+  margin: 0;
 
   img {
     margin: 0;
     height: 100%;
     width: 100%;
+    padding: 16px;
 
     object-fit: contain;
 
